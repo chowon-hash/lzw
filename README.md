@@ -1,3 +1,3 @@
 # lzw
 
-JavaScript/C# implementation of a LZW compression algorithm.
+TypeScript/C# implementation of a LZW compression algorithm.
