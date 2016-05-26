@@ -18,6 +18,7 @@ namespace Utils
         private static _compress(uncompressed, bitsPerChar, getCharFromInt)
         {
             if (uncompressed == null) return "";
+
             var i, value,
                 context_dictionary = {},
                 context_dictionaryToCreate = {},
@@ -45,7 +46,8 @@ namespace Utils
                 if (Object.prototype.hasOwnProperty.call(context_dictionary, context_wc))
                 {
                     context_w = context_wc;
-                } else
+                }
+                else
                 {
                     if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w))
                     {
@@ -59,7 +61,8 @@ namespace Utils
                                     context_data_position = 0;
                                     context_data.push(getCharFromInt(context_data_val));
                                     context_data_val = 0;
-                                } else
+                                }
+                                else
                                 {
                                     context_data_position++;
                                 }
@@ -73,13 +76,15 @@ namespace Utils
                                     context_data_position = 0;
                                     context_data.push(getCharFromInt(context_data_val));
                                     context_data_val = 0;
-                                } else
+                                }
+                                else
                                 {
                                     context_data_position++;
                                 }
                                 value = value >> 1;
                             }
-                        } else
+                        }
+                        else
                         {
                             value = 1;
                             for (i = 0; i < context_numBits; i++)
@@ -90,7 +95,8 @@ namespace Utils
                                     context_data_position = 0;
                                     context_data.push(getCharFromInt(context_data_val));
                                     context_data_val = 0;
-                                } else
+                                }
+                                else
                                 {
                                     context_data_position++;
                                 }
@@ -105,7 +111,8 @@ namespace Utils
                                     context_data_position = 0;
                                     context_data.push(getCharFromInt(context_data_val));
                                     context_data_val = 0;
-                                } else
+                                }
+                                else
                                 {
                                     context_data_position++;
                                 }
@@ -119,7 +126,8 @@ namespace Utils
                             context_numBits++;
                         }
                         delete context_dictionaryToCreate[context_w];
-                    } else
+                    }
+                    else
                     {
                         value = context_dictionary[context_w];
                         for (i = 0; i < context_numBits; i++)
@@ -130,7 +138,8 @@ namespace Utils
                                 context_data_position = 0;
                                 context_data.push(getCharFromInt(context_data_val));
                                 context_data_val = 0;
-                            } else
+                            }
+                            else
                             {
                                 context_data_position++;
                             }
@@ -166,7 +175,8 @@ namespace Utils
                                 context_data_position = 0;
                                 context_data.push(getCharFromInt(context_data_val));
                                 context_data_val = 0;
-                            } else
+                            }
+                            else
                             {
                                 context_data_position++;
                             }
@@ -180,13 +190,15 @@ namespace Utils
                                 context_data_position = 0;
                                 context_data.push(getCharFromInt(context_data_val));
                                 context_data_val = 0;
-                            } else
+                            }
+                            else
                             {
                                 context_data_position++;
                             }
                             value = value >> 1;
                         }
-                    } else
+                    }
+                    else
                     {
                         value = 1;
                         for (i = 0; i < context_numBits; i++)
@@ -197,7 +209,8 @@ namespace Utils
                                 context_data_position = 0;
                                 context_data.push(getCharFromInt(context_data_val));
                                 context_data_val = 0;
-                            } else
+                            }
+                            else
                             {
                                 context_data_position++;
                             }
@@ -212,7 +225,8 @@ namespace Utils
                                 context_data_position = 0;
                                 context_data.push(getCharFromInt(context_data_val));
                                 context_data_val = 0;
-                            } else
+                            }
+                            else
                             {
                                 context_data_position++;
                             }
@@ -226,7 +240,8 @@ namespace Utils
                         context_numBits++;
                     }
                     delete context_dictionaryToCreate[context_w];
-                } else
+                }
+                else
                 {
                     value = context_dictionary[context_w];
                     for (i = 0; i < context_numBits; i++)
@@ -237,14 +252,13 @@ namespace Utils
                             context_data_position = 0;
                             context_data.push(getCharFromInt(context_data_val));
                             context_data_val = 0;
-                        } else
+                        }
+                        else
                         {
                             context_data_position++;
                         }
                         value = value >> 1;
                     }
-
-
                 }
                 context_enlargeIn--;
                 if (context_enlargeIn == 0)
@@ -264,7 +278,8 @@ namespace Utils
                     context_data_position = 0;
                     context_data.push(getCharFromInt(context_data_val));
                     context_data_val = 0;
-                } else
+                }
+                else
                 {
                     context_data_position++;
                 }
@@ -280,7 +295,10 @@ namespace Utils
                     context_data.push(getCharFromInt(context_data_val));
                     break;
                 }
-                else context_data_position++;
+                else
+                {
+                    context_data_position++
+                }
             }
             return context_data.join('');
         }
@@ -444,12 +462,14 @@ namespace Utils
                 if (dictionary[c])
                 {
                     entry = dictionary[c];
-                } else
+                }
+                else
                 {
                     if (c === dictSize)
                     {
                         entry = w + w.charAt(0);
-                    } else
+                    }
+                    else
                     {
                         return null;
                     }
@@ -467,7 +487,6 @@ namespace Utils
                     enlargeIn = Math.pow(2, numBits);
                     numBits++;
                 }
-
             }
         }
     }
