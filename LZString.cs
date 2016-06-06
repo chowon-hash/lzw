@@ -6,22 +6,33 @@ namespace LZString
 {
     public class LZString
     {
-        static Dictionary<string, Dictionary<char, int>> baseReverseDic = new Dictionary<string, Dictionary<char, int>>();
         private delegate char GetCharFromInt(int a);
         private static GetCharFromInt f = (a) => Convert.ToChar(a);
         private delegate int GetNextValue(int index);
 
-        public static string compressToUTF16(string input)
+        public static string CompressLocalStorageSafe(string input)
         {
             if (input == null) return "";
             return _compress(input, 15, (a) => f(a + 32)) + " ";
         }
 
-        public static string decompressFromUTF16(string compressed)
+        public static string DecompressLocalStorageSafe(string compressed)
         {
             if (compressed == null) return "";
             if (compressed == "") return null;
             return _decompress(compressed.Length, 16384, index => Convert.ToInt32(compressed[index]) - 32);
+        }
+
+        public static string Compress(string uncompressed)
+        {
+            return _compress(uncompressed, 16, f);
+        }
+
+        public static string Decompress(string compressed)
+        {
+            if (compressed == null) return "";
+            if (compressed == "") return null;
+            return _decompress(compressed.Length, 32768, (index) => Convert.ToInt32(compressed[index]));
         }
 
         private static string _compress(string uncompressed, int bitsPerChar, GetCharFromInt getCharFromInt)
@@ -300,6 +311,7 @@ namespace LZString
         {
             public int val, position, index;
         }
+
         private static string _decompress(int length, int resetValue, GetNextValue getNextValue)
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>();
