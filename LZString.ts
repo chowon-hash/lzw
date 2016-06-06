@@ -2,13 +2,25 @@ namespace Utils
 {
     export class LZString
     {
-        public static compressToUTF16(input: string)
+        public static compress(uncompressed: string)
+        {
+            return LZString._compress(uncompressed, 16, function (a) { return String.fromCharCode(a); });
+        }
+
+        public static decompress(compressed: string)
+        {
+            if (compressed == null) return "";
+            if (compressed == "") return null;
+            return LZString._decompress(compressed.length, 32768, function (index) { return compressed.charCodeAt(index); });
+        }
+
+        public static compressLocalStorageSafe(input: string)
         {
             if (input == null) return "";
             return LZString._compress(input, 15, function (a) { return String.fromCharCode(a + 32); }) + " ";
         }
 
-        public static decompressFromUTF16(compressed: string)
+        public static decompressLocalStorageSafe(compressed: string)
         {
             if (compressed == null) return "";
             if (compressed == "") return null;
@@ -297,7 +309,7 @@ namespace Utils
                 }
                 else
                 {
-                    context_data_position++
+                    context_data_position++;
                 }
             }
             return context_data.join('');
